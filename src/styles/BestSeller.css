@@ -1,0 +1,19 @@
+/* Ensure navbar is on top */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Adjust the value as needed */
+  }
+  
+  /* Ensure book cards are behind navbar when scrolled */
+  .book-card {
+    position: relative;
+    z-index: 1; /* Adjust the value as needed */
+  }
+  
+  /* Swiper pagination adjustment */
+  .swiper-pagination {
+    z-index: 1;
+  }
+  
