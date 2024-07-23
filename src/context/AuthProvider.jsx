@@ -3,6 +3,7 @@ import {FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, createUser
 import app from "../Firebase/firebase.config";
 
 export const AuthContext = createContext();
+export const BooksContext = createContext("");
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();

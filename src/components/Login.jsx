@@ -1,6 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+import { toast } from "react-toastify";
 
 function Login() {
   const { loginUser , loginWithGoogle } =

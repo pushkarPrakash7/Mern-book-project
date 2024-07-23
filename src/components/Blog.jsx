@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import BlogImage from "../assets/blog.png";
+import { toast } from 'react-toastify';
 
 function Blog() {
     const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ function Blog() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Signed Up Successfully");
+        toast.success("Signed Up Successfully");
 
         setFormData({
             firstName: '',

@@ -46,8 +46,8 @@ function SidebarComponent() {
             <Sidebar.Item href="/shop" icon={HiShoppingBag}>
               Products
             </Sidebar.Item>
-            <Sidebar.Item href="/login" icon={HiArrowSmRight}>
-              Sign In
+            <Sidebar.Item href="/blog" icon={HiArrowSmRight}>
+              Blog
             </Sidebar.Item>
             <Sidebar.Item href="/logout" icon={HiTable}>
               Log Out
