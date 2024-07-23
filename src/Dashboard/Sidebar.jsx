@@ -26,9 +26,9 @@ function SidebarComponent() {
         className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-40 md:z-auto`}
       >
         <div className="ml-2 my-4 flex items-center gap-2">
-        {user.photoURL === null ? (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={ProfileImage} alt="User Profile" />):
-        (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={user.photoURL} alt="User Profile" />)}
-          <p className="font-bold">{user?.displayName || user.email.split('@')[0]}</p>
+        {user?.photoURL === null ? (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={ProfileImage} alt="User Profile" />):
+        (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={user?.photoURL} alt="User Profile" />)}
+          <p className="font-bold">{user?.displayName || user?.email.split('@')[0]}</p>
         </div>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
