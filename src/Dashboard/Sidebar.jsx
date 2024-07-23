@@ -4,7 +4,7 @@ import { BiBuoy } from "react-icons/bi";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards, HiMenu } from "react-icons/hi";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { AuthContext } from "../context/AuthProvider";
-
+import ProfileImage from "../assets/profile.jpg";
 function SidebarComponent() {
   const { user } = useContext(AuthContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -26,8 +26,9 @@ function SidebarComponent() {
         className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-40 md:z-auto`}
       >
         <div className="ml-2 my-4 flex items-center gap-2">
-          <img className="rounded-[50%] h-[40px]" src={user?.photoURL} alt="User profile" />
-          <p className="font-bold">{user?.displayName || "Anonymous"}</p>
+        {user.photoURL === null ? (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={ProfileImage} alt="User Profile" />):
+        (<img className="rounded-full w-6 h-6 md:w-12 md:h-12" src={user.photoURL} alt="User Profile" />)}
+          <p className="font-bold">{user?.displayName || user.email.split('@')[0]}</p>
         </div>
         <Sidebar.Items>
           <Sidebar.ItemGroup>
