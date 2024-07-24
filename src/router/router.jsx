@@ -16,6 +16,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Logout from "../components/Logout";
 import User from "../Dashboard/User";
 import { baseurl } from "../Links";
+import MysteryBooks from "../components/MysteryBooks";
 const router = createBrowserRouter([
   {
     path: "/", 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         element: <SingleBook/>,
         loader : ({params}) =>fetch(`${baseurl}/book/${params.id}`)
       },
+      {
+        path: "/mystery-books",
+        element: <MysteryBooks />
+      }
       
     ]
   },

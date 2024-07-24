@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PromoImage from "../assets/bookPromo.jpg";
 
 function PromoBanner() {
@@ -10,8 +11,8 @@ function PromoBanner() {
         <h3 className="text-2xl md:text-4xl font-bold">
           2023 National Book Awards for Mystery Shortlist.
         </h3>
-        <button className="bg-[#343493] text-white p-2 font-bold mt-2 rounded-sm">
-          Explore Now
+        <button className="bg-[#343493] text-white p-2 font-bold mt-2 rounded-sm hover:from-blue-300 hover:to-[#343493] transition duration-300">
+          <Link to="/mystery-books">Explore Now</Link>
         </button>
       </div>
     </div>
