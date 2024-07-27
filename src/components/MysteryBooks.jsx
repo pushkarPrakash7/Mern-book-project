@@ -27,7 +27,7 @@ function MysteryBooks() {
                 </h1>
                 <img src={awardImage} className="w-32 lg:w-48 my-8 lg:my-0" alt="Award" />
             </div>
-            <div>
+            <div className="bg-slate-300 rounded-md">
                 <BookCard headline="" books={books} />
             </div>
         </div>

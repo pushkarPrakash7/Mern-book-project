@@ -9,7 +9,7 @@ function PromoBanner() {
       </div>
       <div className="p-4 md:p-8 text-center md:text-left">
         <h3 className="text-2xl md:text-4xl font-bold">
-          2023 National Book Awards for Mystery Shortlist.
+          2023 National Book Awards for the Category Mystery Shortlist.
         </h3>
         <button className="bg-[#343493] text-white p-2 font-bold mt-2 rounded-sm hover:from-blue-300 hover:to-[#343493] transition duration-300">
           <Link to="/mystery-books">Explore Now</Link>

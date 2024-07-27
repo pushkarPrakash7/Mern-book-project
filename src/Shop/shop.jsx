@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Card } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaSort, FaShoppingCart, FaFilter } from "react-icons/fa";
 import Shimmer from "./Shimmer";
 import { baseurl } from "../Links.js";
@@ -16,6 +16,11 @@ function Shop() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const location = useLocation();
+  useEffect(()=>{
+    scrollTo(0,0)
+  },[]);
+  
   useEffect(() => {
     fetch(`${baseurl}/all-books`)
       .then((res) => res.json())

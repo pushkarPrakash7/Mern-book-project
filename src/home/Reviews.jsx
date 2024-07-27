@@ -14,8 +14,8 @@ import { Avatar } from "flowbite-react";
 
 function Reviews() {
   return (
-    <div className="my-12 px-4 lg:px-24">
-      <h2 className="text-3xl lg:text-5xl font-bold text-center mb-10 leading-snug">
+    <div className="my-12 px-4 lg:px-24 bg-slate-400 mx-4 py-4 md:py-0 rounded-md">
+      <h2 className="text-3xl pt-4 lg:text-5xl font-bold text-center mb-10 leading-snug">
         Reviews from the Users
       </h2>
       <Swiper
@@ -75,7 +75,7 @@ function Reviews() {
             <div className="mt-7">
               <p className="mb-5">
                 Exceptional variety and service! My go-to for all book needs.
-                Prompt delivery and well-packaged items. Highly recommended
+                Prompt delivery and well-packaged items.
               </p>
               <Avatar img={userImg2} alt="avatar of Jese" rounded className="w-10 mb-4" />
               <h5 className="text-lg font-medium">Emily Watson</h5>

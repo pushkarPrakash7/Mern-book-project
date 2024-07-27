@@ -23,10 +23,12 @@ function Navbar() {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setIsProfileDropdownOpen(false);
   };
 
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+    setIsDropdownOpen(false);
   };
 
   useEffect(() => {
@@ -85,15 +87,15 @@ function Navbar() {
   ];
 
   return (
-    <header className={`${isSticky ? "sticky top-0 left-0 right-0 bg-white text-white" : ""}`}>
+    <header className={`${isSticky ? "sticky top-0 left-0 right-0 text-white" : ""}`}>
       <nav className="font-wittgenstein h-20 flex justify-between items-center px-4 md:px-8 lg:px-16 py-4 bg-[#353593] text-white shadow-md">
-        <div className="flex items-center">
-          <Link to="/">
+        <div>
+          <Link to="/" className="flex items-center">
             <GiSpellBook className="text-6xl text-white inline-block" />
+            <h4 className="text-white text-2xl font-bold mt-2 border-4 border-white border-l-[#353593] p-1 ml-2">
+              EpicReads
+            </h4>
           </Link>
-          <h4 className="text-white text-2xl font-bold mt-2 border-4 border-white border-l-[#353593] p-1 ml-2">
-            EpicReads
-          </h4>
         </div>
 
         {/* Standard menu for medium and larger devices */}
@@ -141,7 +143,7 @@ function Navbar() {
               {isProfileDropdownOpen && (
                 <div className="absolute right-0 mt-2 bg-white text-[#353593] shadow-lg rounded-md z-10 px-4 py-2">
                   <div className="text-base">{user.email}</div>
-                  <Link to="/admin/dashboard/user" className="hover:underline"><div className="flex gap-2 items-center my-1">Profile <FaArrowRight/></div></Link>
+                  <Link to="/admin/dashboard/user" className="hover:underline"><div className="flex gap-2 items-center my-1">Profile <FaArrowRight /></div></Link>
                   <Link to="/logout"><button className="my-2 text-white bg-[#353593] py-1 px-2 rounded-md w-full">Logout</button></Link>
                 </div>
               )}
@@ -171,14 +173,14 @@ function Navbar() {
         </div>
 
         {/* Mobile menu items */}
-        <div ref={menuRef} className={`${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"} md:hidden space-y-4 px-4 mt-24 py-7 bg-[#353593]`}>
+        <div ref={menuRef} className={`${isMenuOpen ? "block fixed -top-4 right-0 left-0" : "hidden"} md:hidden space-y-4 px-4 mt-24 py-7 bg-[#353593]`}>
           {user ? (
             <div className="flex flex-col items-start mb-4">
               <FaCircleUser className="text-4xl text-white cursor-pointer" onClick={toggleProfileDropdown} />
               {isProfileDropdownOpen && (
                 <div className="absolute right-4 mt-2 bg-white text-[#353593] shadow-lg rounded-md z-10 px-4 py-2">
                   <div className="text-base">{user.email}</div>
-                  <Link to="/admin/dashboard/user" className="hover:underline"><div className="flex gap-2 items-center my-1">Profile <FaArrowRight/></div></Link>
+                  <Link to="/admin/dashboard/user" className="hover:underline"><div className="flex gap-2 items-center my-1">Profile <FaArrowRight /></div></Link>
                   <Link to="/logout"><button className="my-2 text-white bg-[#353593] py-1 px-2 rounded-md w-full">Logout</button></Link>
                 </div>
               )}

@@ -9,15 +9,15 @@ import { Link } from "react-router-dom";
 
 const BookCard = ({ headline, books }) => {
   return (
-    <div className="my-16 px-4 lg:px-24">
-      <h2 className="text-3xl lg:text-5xl text-center font-bold text-black my-5">
+    <div className="my-16 px-2 lg:px-24">
+      <h2 className="text-3xl lg:text-5xl text-center font-bold text-black pt-4">
         {headline}
       </h2>
       <div className="mt-12">
         <Swiper
           autoplay={{
             delay: 3000,
-            disableOnInteraction: false,
+            disableOnInteraction: true,
           }}
           loop={true}
           slidesPerView={2}
@@ -62,7 +62,7 @@ const BookCard = ({ headline, books }) => {
           className="mySwiper"
         >
           {books.map((book) => (
-            <SwiperSlide key={book._id} className="shadow-lg rounded-md p-2 mb-4">
+            <SwiperSlide key={book._id} className="shadow-lg bg-white rounded-md p-2 mb-4 h-auto">
               <Link to={`/book/${book._id}`}>
                 <div className="relative">
                   <img src={book.ImageURL} alt="" className="w-full h-auto rounded-md" />

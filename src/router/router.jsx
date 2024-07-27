@@ -17,6 +17,7 @@ import Logout from "../components/Logout";
 import User from "../Dashboard/User";
 import { baseurl } from "../Links";
 import MysteryBooks from "../components/MysteryBooks";
+import Search from "../components/Search";
 const router = createBrowserRouter([
   {
     path: "/", 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />
+      },
+      {
+        path: "/search",
+        element: <Search />
       },
       {
         path: "/book/:id",

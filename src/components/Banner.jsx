@@ -1,9 +1,20 @@
-import background from "../assets/background.mp4";
+import {useNavigate } from "react-router-dom";
+import background from "../assets/background.webm";
+import { useState } from "react";
 
 function Banner() {
+
+  const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchText.trim() !== "") {
+      navigate(`/search?query=${encodeURIComponent(searchText)}`);
+    }
+  };
   return (
-    <div className='px-4 lg:px-24 bg-[#353593] flex items-center'>
-      <div className='flex w-full flex-col md:flex-row justify-between items-center gap-12 py-16'>
+    <div className='px-4 lg:px-24 bg-[#353593]'>
+      <div className='flex w-full flex-col md:flex-row justify-between items-center gap-16 py-16'>
         {/* Left Side */}
         <div className='md:w-1/2 space-y-8 h-full text-center md:text-left'>
           <h2 className='text-3xl md:text-5xl font-bold leading-snug text-white'>
@@ -19,8 +30,9 @@ function Banner() {
               id="search"
               placeholder="Search a book"
               className='py-2 px-2 rounded-l-md focus:outline-none flex-grow'
+              onChange={(e)=>{setSearchText(e.target.value)}}
             />
-            <button className='bg-[#f1b94a] text-black px-6 py-2 font-medium hover:bg-black hover:text-white transition-all ease-in duration-200 rounded-r-md '>
+            <button onClick={handleSearch} className='bg-[#f1b94a] text-black px-6 py-2 font-medium hover:bg-black hover:text-white transition-all ease-in duration-200 rounded-r-md '>
               Search
             </button>
           </div>

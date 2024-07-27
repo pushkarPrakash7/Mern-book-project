@@ -1,5 +1,5 @@
 import FavBookImg from "../assets/FavBookImg.jpg";
-
+import {Link} from "react-router-dom";
 function FavBooks() {
   return (
     <div className="relative h-[700px] lg:h-[540px]"> {/* Increased height for small screens */}
@@ -29,7 +29,7 @@ function FavBooks() {
             </div>
           </div>
           <button className="bg-[#343493] text-white p-2 font-bold mt-4 rounded-sm md:self-start">
-            Explore More
+            <Link to="/shop">Explore Here</Link>
           </button>
         </div>
       </div>
