@@ -17,10 +17,10 @@ function Shop() {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
-  useEffect(()=>{
-    scrollTo(0,0)
-  },[]);
-  
+  useEffect(() => {
+    scrollTo(0, 0)
+  }, [location]);
+
   useEffect(() => {
     fetch(`${baseurl}/all-books`)
       .then((res) => res.json())
@@ -43,6 +43,7 @@ function Shop() {
       setFilteredBooks(filtered);
     }
     setSelectedCategory(category);
+    scrollTo(0, 200);
     setFilterDropdownOpen(false);
   };
 
@@ -55,7 +56,6 @@ function Shop() {
       sortedBooks.sort((a, b) => b.bookTitle.localeCompare(a.bookTitle));
     }
     setFilteredBooks(sortedBooks);
-    setDropdownOpen(false);
   };
 
   const handleSearch = () => {
@@ -71,6 +71,9 @@ function Shop() {
   };
 
   const categories = [
+    "Adventure",
+    "Arts",
+    "Astrology",
     "Aesthetics",
     "Art and Design",
     "Atheism",
@@ -111,7 +114,7 @@ function Shop() {
   ];
 
   return (
-    <div className="mt-28 px-4 lg:px-24 font-wittgenstein">
+    <div className="mt-16 px-4 lg:px-24 font-wittgenstein">
       <h2 className="text-3xl lg:text-5xl font-bold text-center">
         Shop your favorite book here
       </h2>
@@ -121,6 +124,9 @@ function Shop() {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onClick={()=>
+              {setDropdownOpen(false)
+              setFilterDropdownOpen(false)}}
             className="px-4 py-2 rounded-l-md flex-grow"
             placeholder="Search by book title..."
           />
@@ -134,20 +140,35 @@ function Shop() {
         <div className="flex justify-center w-full my-4">
           <button
             className="mr-2 px-4 py-2 rounded-full lg:hidden bg-gray-200 text-gray-700 focus:outline-none"
-            onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+            onClick={() => {
+              setFilterDropdownOpen(!filterDropdownOpen)
+              setDropdownOpen(false)
+            }}
           >
             <FaFilter />
           </button>
           <button
             className="mr-2 flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white focus:outline-none"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
+            onClick={() => {
+              setDropdownOpen(!dropdownOpen)
+              setFilterDropdownOpen(false)
+            }}
           >
             Sort <FaSort />
           </button>
         </div>
         {filterDropdownOpen && (
           <div className="w-full lg:hidden z-50">
-            <div className="origin-top-right absolute mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="origin-top-right absolute mt-2 w-5/6 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <button
+                className={`block w-full text-left px-4 py-2 text-sm ${selectedCategory === "All"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700"
+                  } hover:bg-blue-700 hover:text-white`}
+                onClick={() => handleFilter("All")}
+              >
+                All Books
+              </button>
               {categories.sort().map((category) => (
                 <button
                   key={category}
@@ -187,24 +208,18 @@ function Shop() {
           ))}
         </div>
         {dropdownOpen && (
-          <div className="origin-top-right absolute mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="origin-top-left absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 focus:outline-none">
             <div
-              className="flex py-1"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="options-menu"
-            >
+              className="flex py-1">
               <button
                 onClick={() => handleSort("A-Z")}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white"
-                role="menuitem"
+                className="block ml-4 px-2 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white hover:rounded-md"
               >
                 Sort A-Z
               </button>
               <button
                 onClick={() => handleSort("Z-A")}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white"
-                role="menuitem"
+                className="block ml-4 px-2 py-2 text-sm text-gray-700 hover:bg-blue-700 hover:text-white hover:rounded-md"
               >
                 Sort Z-A
               </button>
@@ -225,8 +240,8 @@ function Shop() {
           {filteredBooks.map((book) => (
             <Card
               key={book._id}
-              className="max-w-xs mx-auto relative my-4 rounded-md shadow-2xl p-2"
-              imgAlt="Meaningful alt text for an image that is not purely decorative"
+              className="max-w-xs mx-auto relative my-4 rounded-md shadow-2xl p-2 ring-2 ring-black ring-opacity-10"
+              imgAlt="Book Image"
               imgSrc={book.ImageURL}
             >
               <div className="">

@@ -17,10 +17,10 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-lg font-semibold">Help Center</h3>
             <ul className="mt-4 space-y-2 text-white">
-              <li><a href="#" className="hover:underline">Discord Server</a></li>
-              <li><a href="#" className="hover:underline">Twitter</a></li>
-              <li><a href="#" className="hover:underline">Instagram</a></li>
-              <li><a href="#" className="hover:underline">Contact Us</a></li>
+              <li><a href="https://discord.com/" className="hover:underline">Discord Server</a></li>
+              <li><a href="https://x.com/" className="hover:underline">Twitter</a></li>
+              <li><a href="https://www.instagram.com/" className="hover:underline">Instagram</a></li>
+              <li><a href="/contact" className="hover:underline">Contact Us</a></li>
             </ul>
           </div>
           <div>
