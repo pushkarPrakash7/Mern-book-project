@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import BlogImage from "../assets/blog.png";
-import { toast } from 'react-toastify';
-
+import BlogVideo from "../assets/Blog.mp4";
 function Blog() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -20,7 +18,7 @@ function Blog() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        toast.success("Signed Up Successfully");
+        alert("Signed Up Successfully");
 
         setFormData({
             firstName: '',
@@ -35,7 +33,14 @@ function Blog() {
                 <h1 className='text-3xl md:text-5xl text-[#353593] font-bold my-2 pr-4 md:pr-20'>Subscribe to Our <span className='text-[#f1b94a]'>Newsletter Blog</span></h1>
                 <p className='text-base md:text-lg mb-4'>Sign up for our weekly newsletter to receive the latest books, updates, and special offers from Epic Reads.</p>
                 <div className='block md:hidden'>
-                    <img src={BlogImage} className='mb-4 md:h-96 md:w-96' alt='Blog' />
+                    <video 
+                        src={BlogVideo} 
+                        className='mb-4 md:h-96 md:w-96' 
+                        alt='Blog' 
+                        muted 
+                        autoPlay 
+                        loop 
+                    />
                 </div>
                 <form onSubmit={handleSubmit} className='flex flex-col'>
                     <label className='mb-2' htmlFor='firstName'>First Name</label>
@@ -69,7 +74,14 @@ function Blog() {
                 </form>
             </div>
             <div className='hidden md:block md:w-1/2 mt-8 md:mt-0'>
-                <img src={BlogImage} className='m-16 px-16 w-full h-auto' alt='Blog' />
+                <video 
+                    src={BlogVideo} 
+                    className='my-16 px-20 w-full h-auto' 
+                    alt='Blog' 
+                    muted 
+                    autoPlay 
+                    loop 
+                />
             </div>
         </div>
     );
