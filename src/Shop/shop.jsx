@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { FaSort, FaShoppingCart, FaFilter } from "react-icons/fa";
 import Shimmer from "./Shimmer";
 import { baseurl } from "../Links.js";
+import { CartContext } from "../context/CartContext.jsx";
 
 function Shop() {
   const [books, setBooks] = useState([]);
@@ -15,6 +16,7 @@ function Shop() {
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const {addToCart} = useContext(CartContext);
 
   const location = useLocation();
   useEffect(() => {
@@ -70,6 +72,10 @@ function Shop() {
     handleSearch();
   };
 
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    alert("Item added to Cart");
+  }
   const categories = [
     "Adventure",
     "Arts",
@@ -256,7 +262,7 @@ function Shop() {
                   <h3 className="bg-blue-600 text-white rounded-md px-2 inline-block my-1">{book.Category}</h3>
                 </div>
               </div>
-              <button className="absolute top-4 right-4 text-white bg-blue-600 font-medium rounded-full p-2 shadow-md hover:bg-blue-700">
+              <button className="absolute top-4 right-4 text-white bg-blue-600 font-medium rounded-full p-2 shadow-md hover:bg-blue-700" onClick={()=> handleAddToCart(book)}>
                 <FaShoppingCart />
               </button>
             </Card>

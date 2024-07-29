@@ -5,17 +5,21 @@ import { FaBarsStaggered, FaCircleUser, FaXmark } from "react-icons/fa6";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import "../styles/navbar.css";
 import { AuthContext } from "../context/AuthProvider";
+import { CartContext } from "../context/CartContext";
+import Cart from "./Cart";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false); // State for controlling cart modal visibility
 
   const { user } = useContext(AuthContext);
   const menuRef = useRef(null);
   const dropdownRef = useRef(null);
   const profileRef = useRef(null);
+  const { cartItems } = useContext(CartContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,6 +33,10 @@ function Navbar() {
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
     setIsDropdownOpen(false);
+  };
+
+  const handleCartClick = () => {
+    setIsCartOpen(!isCartOpen);
   };
 
   useEffect(() => {
@@ -67,7 +75,6 @@ function Navbar() {
     };
   }, []);
 
-  // navitems
   const navitems = [
     { link: "Home", path: "/" },
     { link: "About", path: "/about" },
@@ -77,7 +84,6 @@ function Navbar() {
     { link: "Checkout", path: null },
   ];
 
-  // dropdown items
   const dropdownItems = [
     { link: "Trending", path: "/trending" },
     { link: "New Releases", path: "/new-releases" },
@@ -98,7 +104,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Standard menu for medium and larger devices */}
         <ul className="hidden md:flex space-x-6 ml-8">
           {navitems.map((item) =>
             item.path ? (
@@ -136,7 +141,12 @@ function Navbar() {
         </ul>
 
         <div className="hidden lg:flex gap-2 items-center">
-          <FaShoppingCart className="ml-4 text-2xl" />
+          <div className="relative">
+            <button onClick={handleCartClick} className="ml-4 text-2xl">
+              <FaShoppingCart />
+              {cartItems.length > 0 && <span className="bg-[#f1b94a] absolute rounded-full h-4 w-4 text-xs text-center text-black -top-1 left-8">{cartItems.length}</span>}
+            </button>
+          </div>
           {user ? (
             <div className="relative" ref={profileRef} onClick={toggleProfileDropdown}>
               <FaCircleUser className="ml-8 text-4xl cursor-pointer" />
@@ -160,9 +170,11 @@ function Navbar() {
           )}
         </div>
 
-        {/* Menu button for mobile devices */}
         <div className="md:hidden flex gap-4">
-          <FaShoppingCart className="h-5 w-5" />
+            <button onClick={handleCartClick} className="ml-4 text-2xl relative">
+              <FaShoppingCart />
+              {cartItems.length > 0 && <span className="bg-[#f1b94a] absolute rounded-full h-4 w-4 text-xs text-center text-gray-600 -top-1 left-4">{cartItems.length}</span>}
+            </button>
           <button onClick={toggleMenu} className="text-white focus:outline-none">
             {isMenuOpen ? (
               <FaXmark className="h-5 w-5 text-white" />
@@ -172,7 +184,6 @@ function Navbar() {
           </button>
         </div>
 
-        {/* Mobile menu items */}
         <div ref={menuRef} className={`${isMenuOpen ? "block fixed -top-4 right-0 left-0" : "hidden"} md:hidden space-y-4 px-4 mt-24 py-7 bg-[#353593]`}>
           {user ? (
             <div className="flex flex-col items-start mb-4">
@@ -234,6 +245,7 @@ function Navbar() {
           )}
         </div>
       </nav>
+      <Cart isOpen={isCartOpen} onClose={handleCartClick} />
     </header>
   );
 }

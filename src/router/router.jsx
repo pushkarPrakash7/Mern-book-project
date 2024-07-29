@@ -51,8 +51,7 @@ const router = createBrowserRouter([
       {
         path: "/mystery-books",
         element: <MysteryBooks />
-      }
-      
+      },
     ]
   },
   {

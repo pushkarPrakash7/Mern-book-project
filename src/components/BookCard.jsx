@@ -6,8 +6,17 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const BookCard = ({ headline, books }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    alert("Item added to Cart");
+  }
+
   return (
     <div className="my-16 px-2 lg:px-24">
       <h2 className="text-3xl lg:text-5xl text-center font-bold text-black pt-4">
@@ -63,18 +72,18 @@ const BookCard = ({ headline, books }) => {
         >
           {books.map((book) => (
             <SwiperSlide key={book._id} className="shadow-lg bg-white rounded-md p-2 mb-4 h-auto">
-              <Link to={`/book/${book._id}`}>
-                <div className="relative">
-                  <img src={book.ImageURL} alt="" className="w-full h-auto rounded-md" />
-                  <div className="absolute top-3 right-3">
+              <div className="relative">
+                <Link to={`/book/${book._id}`}><img src={book.ImageURL} alt="" className="w-full h-auto rounded-md" /></Link>
+                <div className="absolute top-3 right-3">
+                  <button onClick={() => handleAddToCart(book)}>
                     <FaShoppingCart className="bg-[#353593] text-lg rounded-md text-white p-1 w-7 h-7 hover:bg-black" />
-                  </div>
+                  </button>
                 </div>
-                <div className="mt-2 text-center md:text-left">
-                  <p className="font-medium text-lg">{book.bookTitle.length > 10 ? book.bookTitle.slice(0, 10) + "..." : book.bookTitle}</p>
-                  <p className="text-gray-500">{book.authorName}</p>
-                </div>
-              </Link>
+              </div>
+              <div className="mt-2 text-center md:text-left">
+                <p className="font-medium text-lg">{book.bookTitle.length > 10 ? book.bookTitle.slice(0, 10) + "..." : book.bookTitle}</p>
+                <p className="text-gray-500">{book.authorName}</p>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
