@@ -1,10 +1,11 @@
-import { Table} from "flowbite-react";
+import { Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseurl } from "../Links";
+import { toast } from "react-toastify";
+
 function ManageBooks() {
   const [allBooks, setAllBooks] = useState([]);
-
 
   useEffect(() => {
     fetch(`${baseurl}/all-books`)
@@ -12,21 +13,24 @@ function ManageBooks() {
       .then((data) => setAllBooks(data));
   }, []);
 
-  const handleDelete=(id)=>{
-    fetch(`${baseurl}/book/${id}`,{
-      method:"DELETE"
-    }).then(res=>res.json()).then(data=>{
-      if(data.deletedCount===1){
-        alert("Book Deleted Successfully");
-        setAllBooks(data);
-        window.location.reload()
-      }
+  const handleDelete = (id) => {
+    fetch(`${baseurl}/book/${id}`, {
+      method: "DELETE",
     })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount === 1) {
+          toast.success("Book Deleted Successfully");
+          setAllBooks((prevBooks) => prevBooks.filter((book) => book._id !== id));
+        }
+      });
+  };
 
   return (
     <div className="px-4 my-12">
-      <h2 className="my-8 md:my-0 md:mb-8 text-3xl font-bold font-wittgenstein">Manage Your Books</h2>
+      <h2 className="my-8 md:my-0 md:mb-8 text-3xl font-bold font-wittgenstein">
+        Manage Your Books
+      </h2>
       <Table striped className="lg:w-[1020px]">
         <Table.Head>
           <Table.HeadCell>Serial No.</Table.HeadCell>
@@ -35,14 +39,19 @@ function ManageBooks() {
           <Table.HeadCell>Category</Table.HeadCell>
           <Table.HeadCell>Price</Table.HeadCell>
           <Table.HeadCell>
-            <span>Edit or Manage</span>
+            <span>Edit or Delete</span>
           </Table.HeadCell>
         </Table.Head>
-        {allBooks.map((book, index) => (
-          <Table.Body className="divide-y" key={book._id}>
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+        <Table.Body className="divide-y">
+          {allBooks.map((book, index) => (
+            <Table.Row
+              key={book._id}
+              className={`${
+                index % 2 === 0 ? "bg-white" : "bg-purple-400"
+              } dark:border-gray-700 dark:bg-gray-800`}
+            >
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {index+1}
+                {index + 1}.
               </Table.Cell>
               <Table.Cell>{book.bookTitle}</Table.Cell>
               <Table.Cell>{book.authorName}</Table.Cell>
@@ -51,15 +60,20 @@ function ManageBooks() {
               <Table.Cell className="flex gap-4 items-center">
                 <Link
                   to={`/admin/dashboard/edit-books/${book._id}`}
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 "
+                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Edit
                 </Link>
-                <button onClick={()=> handleDelete(book._id)} className="bg-red-600 px-4 py-1 font-semibold text-white rounded-sm hover:bg-black">Delete</button>
+                <button
+                  onClick={() => handleDelete(book._id)}
+                  className="bg-red-600 px-4 py-1 font-semibold text-white rounded-sm hover:bg-black"
+                >
+                  Delete
+                </button>
               </Table.Cell>
             </Table.Row>
-          </Table.Body>
-        ))}
+          ))}
+        </Table.Body>
       </Table>
     </div>
   );

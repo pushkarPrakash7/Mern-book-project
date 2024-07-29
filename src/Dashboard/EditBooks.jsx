@@ -3,6 +3,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import { useState } from "react";
 import { baseurl } from "../Links";
+import { toast } from "react-toastify";
 
 function EditBooks() {
   const { id } = useParams();
@@ -98,12 +99,12 @@ function EditBooks() {
         return res.json();
       })
       .then((data) => {
-        alert("Book updated successfully");
-        window.location.href = "/admin/dashboard/manage-books"; // Redirect after successful update
+        toast.success("Book updated successfully");
+        window.location.href = "/admin/dashboard/manage-books"; 
       })
       .catch((err) => {
         console.error('Error updating book:', err);
-        alert('Failed to update book. Please try again.');
+        toast.error('Failed to update book. Please try again.');
       });
   };
 

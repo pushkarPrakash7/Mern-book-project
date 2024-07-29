@@ -1,6 +1,8 @@
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import { useState } from "react";
 import { baseurl } from "../Links.js"
+import { toast } from "react-toastify";
+
 function UploadBooks() {
   const bookCategories = [
     "--Select Category--",
@@ -71,9 +73,7 @@ function UploadBooks() {
       bookPDFURL,
       price,
     };
-    console.log(bookObj);
-
-
+    
     fetch(`${baseurl}/upload-book`, {
       method: "POST",
       headers: {
@@ -84,7 +84,7 @@ function UploadBooks() {
       .then((res) => res.json())
       // eslint-disable-next-line no-unused-vars
       .then((data) => {
-        alert("Book uploaded successfull!");
+        toast.success("Book uploaded successfully!");
         form.reset();
       });
 
@@ -104,7 +104,7 @@ function UploadBooks() {
             <TextInput
               id="bookTitle"
               name="bookTitle"
-              type="bookTitle"
+              type="text"
               placeholder="Book Title"
               required
             />
@@ -116,7 +116,7 @@ function UploadBooks() {
             <TextInput
               id="authorName"
               name="authorName"
-              type="authorName"
+              type="text"
               placeholder="Author Name"
               required
             />
@@ -132,7 +132,7 @@ function UploadBooks() {
             <TextInput
               id="ImageURL"
               name="ImageURL"
-              type="ImageURL"
+              type="text"
               placeholder="Image URL"
               required
             />
@@ -165,7 +165,7 @@ function UploadBooks() {
           <Textarea
             id="bookDescription"
             name="bookDescription"
-            type="Text"
+            type="text"
             placeholder="Write your Book Description"
             className="w-full"
             rows={4}
