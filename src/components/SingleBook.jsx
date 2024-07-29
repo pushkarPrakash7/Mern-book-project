@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 function SingleBook() {
   const location = useLocation();
@@ -9,7 +11,25 @@ function SingleBook() {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const { bookTitle, ImageURL, bookDescription, authorName, Category, price, bookPDFURL } = useLoaderData();
+  const {addToCart} = useContext(CartContext);
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    toast.success("Item added to cart");
+  }
+
+  const { _id, bookTitle, ImageURL, bookDescription, authorName, Category, price, bookPDFURL } = useLoaderData();
+
+  const bookItem = {
+    _id: _id,
+    bookTitle: bookTitle,
+    ImageURL: ImageURL,
+    bookDescription: bookDescription,
+    authorName: authorName,
+    category: Category,
+    price: price,
+    bookPDFURL: bookPDFURL
+  };
   return (
     <div className="bg-gray-300 px-4 py-8 lg:px-16 flex justify-center font-wittgenstein">
       <div className="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg shadow-md w-full max-w-screen-lg">
@@ -30,7 +50,7 @@ function SingleBook() {
           <p className="my-4">{bookDescription}</p>
           <div className="flex flex-col md:flex-row gap-2">
             <button className="w-full py-2 px-4 my-2 bg-[#343493] hover:bg-blue-600 transition duration-300 rounded-md text-white"><Link to={bookPDFURL}>Click Here to View PDF</Link></button>
-            <button className="w-full py-2 px-4 my-2 bg-yellow-300 hover:bg-yellow-400 transition duration-300 rounded-md text-white">Add to Cart</button>
+            <button className="w-full py-2 px-4 my-2 bg-yellow-300 hover:bg-yellow-400 transition duration-300 rounded-md text-white" onClick={()=>handleAddToCart(bookItem)}>Add to Cart</button>
           </div>
         </div>
       </div>

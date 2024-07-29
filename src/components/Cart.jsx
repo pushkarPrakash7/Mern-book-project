@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartContext";
 import { FaTimes, FaTrash } from "react-icons/fa";
 import { IoIosRemove, IoIosAdd } from "react-icons/io";
 import { useLocation } from "react-router-dom";
-
+import {toast} from "react-toastify"
 function Cart({ isOpen, onClose }) {
     const { cartItems, setCartItems } = useContext(CartContext);
     const location = useLocation();
@@ -23,12 +23,17 @@ function Cart({ isOpen, onClose }) {
         if (newCartItems[index].quantity > 1) {
             newCartItems[index].quantity -= 1;
         }
+        else{
+            toast.error("Cannot decrease quantity below 1");
+            return;
+        }
         setCartItems(newCartItems);
     };
 
     const handleRemoveItem = (index) => {
         const newCartItems = cartItems.filter((_, i) => i !== index);
         setCartItems(newCartItems);
+        toast.success("Item removed successfully");
     };
 
     const calculateTotalPrice = () => {

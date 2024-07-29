@@ -6,6 +6,7 @@ import { FaSort, FaShoppingCart, FaFilter } from "react-icons/fa";
 import Shimmer from "./Shimmer";
 import { baseurl } from "../Links.js";
 import { CartContext } from "../context/CartContext.jsx";
+import { toast } from "react-toastify";
 
 function Shop() {
   const [books, setBooks] = useState([]);
@@ -74,7 +75,7 @@ function Shop() {
 
   const handleAddToCart = (item) => {
     addToCart(item);
-    alert("Item added to Cart");
+    toast.success("Item added to Cart");
   }
   const categories = [
     "Adventure",

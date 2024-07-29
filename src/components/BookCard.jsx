@@ -8,15 +8,17 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 const BookCard = ({ headline, books }) => {
   const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = (item) => {
     addToCart(item);
-    alert("Item added to Cart");
+    toast.success("Item added to Cart");
   }
 
+  
   return (
     <div className="my-16 px-2 lg:px-24">
       <h2 className="text-3xl lg:text-5xl text-center font-bold text-black pt-4">
